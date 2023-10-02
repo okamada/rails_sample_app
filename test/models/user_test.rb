@@ -56,4 +56,11 @@ class UserTest < ActiveSupport::TestCase
       assert_not @user.valid?, "#{invalid_address.inspect} shoule be invalid"
     end
   end
+
+  test "email address should be unique" do
+    duplicate_user = @user.dup
+    duplicate_user.email = @user.email.upcase # メールアドレスは大文字小文字が区別されない
+    @user.save
+    assert_not duplicate_user.valid?
+  end
 end
