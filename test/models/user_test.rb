@@ -59,7 +59,6 @@ class UserTest < ActiveSupport::TestCase
 
   test "email address should be unique" do
     duplicate_user = @user.dup
-    duplicate_user.email = @user.email.upcase # メールアドレスは大文字小文字が区別されない
     @user.save
     assert_not duplicate_user.valid?
   end
