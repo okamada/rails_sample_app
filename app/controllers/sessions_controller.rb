@@ -3,13 +3,13 @@ class SessionsController < ApplicationController
   end
 
   def create
-    @user = User.find_by(email: params[:session][:email].downcase)
-    if @user&.authenticate(params[:session][:password])
+    @admin = User.find_by(email: params[:session][:email].downcase)
+    if @admin&.authenticate(params[:session][:password])
       forwarding_url = session[:forwarding_url]
       reset_session # ログインの直前に必ず書く処理 ∵セッション固定攻撃への対策
-      params[:session][:remember_me] == '1' ? remember(@user) : forget(@user)
-      log_in @user
-      redirect_to forwarding_url || @user
+      params[:session][:remember_me] == '1' ? remember(@admin) : forget(@admin)
+      log_in @admin
+      redirect_to forwarding_url || @admin
     else
       flash.now[:danger] = 'Invalid email/password combination'
       render 'new', status: :unprocessable_entity
