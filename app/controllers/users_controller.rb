@@ -29,6 +29,8 @@ class UsersController < ApplicationController
     @user = User.find(params[:id])
     if @user.update(user_params)
       # TODO 更新に成功した場合の処理
+      flash[:success] = "Profile updated"
+      redirect_to @user
     else
       render 'edit', status: :unprocessable_entity
     end
