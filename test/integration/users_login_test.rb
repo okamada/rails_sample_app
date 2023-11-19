@@ -93,6 +93,6 @@ class RememberingTest < UsersLogin
 
     # Cookieが削除されていることを検証してからログイン
     log_in_as(@user, remember_me: '0')
-    assert cookies[:remember_token].blank?
+    assert_empty cookies[:remember_token]
   end
 end
