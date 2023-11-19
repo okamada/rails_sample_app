@@ -44,6 +44,11 @@ module SessionsHelper
     end
   end
 
+  # 渡されたユーザーがカレントユーザーか？
+  def current_user?(user)
+    user && user == current_user
+  end
+
   # ユーザーがログインしている時true, それ以外の時false
   def logged_in?
     !current_user.nil?
